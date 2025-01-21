@@ -2,3 +2,7 @@ body {
   background-color: antiquewhite;
   color: midnightblue;
 }
+
+a {
+  text-decoration: none;
+}
