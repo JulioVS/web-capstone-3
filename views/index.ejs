@@ -23,29 +23,29 @@
     </div>
     <br />
 
-    <% blog.forEach(entry=> { %>
+    <% blog.forEach(entry => { %>
       <div class="container">
         <h3>
           <%= entry.title %>
         </h3>
         <p>
-          Author: <em>
-            <%= entry.author%>
-          </em> |
-          Date: <em>
-            <%= entry.date %>
-          </em>
+          Author: <em> <%= entry.author%> </em> |
+          Date: <em> <%= entry.date %> </em>
         </p>
         <p>
           <%= entry.content %>
         </p>
         <p>
-          <a href="/edit/<%= entry.id %>" class="badge rounded-pill text-bg-primary">Edit</a> | 
-          <a href="/delete/<%= entry.id %>" class="badge rounded-pill text-bg-danger">Delete</a>
+          <a href="/edit/<%= entry.id %>" class="badge rounded-pill text-bg-primary">
+            Edit
+          </a> |
+          <a href="/delete/<%= entry.id %>" class="badge rounded-pill text-bg-danger">
+            Delete
+          </a>
         </p>
       </div>
       <br />
-    <% }) %>
+      <% }) %>
 
   </div>
 

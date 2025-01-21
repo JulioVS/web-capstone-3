@@ -42,10 +42,12 @@ app.get("/edit/:id", (req,res) => {
 });
 
 app.get("/delete/:id", (req,res) => {
-  console.log(`Delete request for Blog Entry # ${req.params.id}`);
+  let target = entries.findIndex(e => e.id == req.params.id);
+  entries.splice(target,1);
+
   res.redirect("/");
 });
 
 app.listen(port, () => {
-  console.log(`Served started on Port ${port}.`);
+  console.log(`Server started on Port ${port}.`);
 });
