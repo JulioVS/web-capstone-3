@@ -19,18 +19,23 @@
     </div>
 
     <div class="container">
-      <h2>Blog Entries</h2>
+      <a href="/create" class="badge rounded-pill text-bg-primary">Create New Post</a>
     </div>
     <br />
 
     <% blog.forEach(entry => { %>
       <div class="container">
+        <hr />
         <h3>
           <%= entry.title %>
         </h3>
         <p>
-          Author: <em> <%= entry.author%> </em> |
-          Date: <em> <%= entry.date %> </em>
+          Author: <em>
+            <%= entry.author%>
+          </em> |
+          Date: <em>
+            <%= entry.date %>
+          </em>
         </p>
         <p>
           <%= entry.content %>
@@ -45,8 +50,7 @@
         </p>
       </div>
       <br />
-      <% }) %>
-
+    <% }) %>
   </div>
 
   <!-- Boostrap JS -->

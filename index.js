@@ -1,4 +1,5 @@
 import express from "express";
+import bodyParser from "body-parser";
 
 const app = express();
 const port = 3000;
@@ -31,19 +32,44 @@ var entries = [
 ];
 
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", { blog: entries });
+  res.render("index.ejs", { blog: entries.toReversed() });
 });
 
-app.get("/edit/:id", (req,res) => {
+app.get("/create", (req, res) => {
+  res.render("post.ejs");
+});
+
+app.post("/create", (req, res) => {
+  let { title, content } = req.body;
+  let id = getNextId();
+  let author = "Julio";
+  let date = new Date();
+  let newEntry = { id, title, content, author, date };
+  
+  console.log(newEntry);
+  entries.push(newEntry);
+
+  res.redirect("/");
+});
+
+function getNextId() {
+  let lastEntry = entries[entries.length - 1];
+  let nextId = lastEntry.id + 1;
+
+  return nextId;
+}
+
+app.get("/edit/:id", (req, res) => {
   console.log(`Edit request for Blog Entry # ${req.params.id}`);
   res.redirect("/");
 });
 
-app.get("/delete/:id", (req,res) => {
-  let target = entries.findIndex(e => e.id == req.params.id);
-  entries.splice(target,1);
+app.get("/delete/:id", (req, res) => {
+  let target = entries.findIndex((e) => e.id == req.params.id);
+  entries.splice(target, 1);
 
   res.redirect("/");
 });
