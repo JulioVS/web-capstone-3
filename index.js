@@ -56,14 +56,34 @@ app.post("/create", (req, res) => {
 });
 
 function getNextId() {
-  let lastEntry = entries[entries.length - 1];
-  let nextId = lastEntry.id + 1;
+  var lastEntry, nextId;
+  
+  if (entries.length > 0) {
+    lastEntry = entries[entries.length - 1];
+    nextId = lastEntry.id + 1;
+  } else {
+    nextId = 1;
+  }
 
   return nextId;
 }
 
 app.get("/edit/:id", (req, res) => {
-  console.log(`Edit request for Blog Entry # ${req.params.id}`);
+  let target = entries.findIndex((e) => e.id == req.params.id);
+  let entry = entries[target];
+
+  res.render("edit.ejs", { post: entry });
+});
+
+app.post("/edit/:id", (req, res) => {
+  let target = entries.findIndex((e) => e.id == req.params.id);
+  let entry = entries[target];
+
+  entry.title = req.body.title;
+  entry.content = req.body.content;
+
+  console.log(entry);
+
   res.redirect("/");
 });
 
